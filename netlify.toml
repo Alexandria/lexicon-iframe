@@ -2,10 +2,15 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; frame-ancestors 'self' http://localhost:3000 lexicon-iframe.netlify.app;"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-ancestors 'self' http://localhost:3000 lexicon-iframe.netlify.app;"
 
 # Headers for your specific CSS file (CORS)
 [[headers]]
   for = "/style.css" 
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/assets/*.css"
   [headers.values]
     Access-Control-Allow-Origin = "*"
