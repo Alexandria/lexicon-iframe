@@ -1,2 +1,2 @@
 /*
-  Content-Security-Policy: frame-ancestors 'self' lexicon-iframe.netlify.app http://localhost:3000;
+  Content-Security-Policy: frame-ancestors 'self' netlify.app http://localhost:3000;
