@@ -1,11 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Lexicon Iframe</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lexicon Iframe</title>
+    <link rel="stylesheet" href="/src/style.css" />
+    <script type="module" src="/src/FormField.js" defer></script>
+    <style>
+      /* Hide the up down arrows in the number fields */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Hide spin buttons in Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <form id="payment-form">
+      <div class="form">
+        <h3>Save Payment Details</h3>
+        <form-field
+          pattern-mismatch-message="This field can only be numbers and letters"
+          too-long-message="This field can only by 60 characters long"
+          too-short-message="This field must be at least 2 characters long"
+        >
+          <label for="cardholder" class="visually-hidden">Card Holder</label>
+          <input
+            class="full-width"
+            type="text"
+            id="cardholder"
+            pattern="^[a-zA-Z0-9\s]*$"
+            minlength="2"
+            maxlength="60"
+            placeholder="Name on card"
+            required
+          />
+        </form-field>
+        <form-field
+          range-overflow-message="This field has a max of 19 digits"
+          range-underflow-message="This field has a minium of 15 digits"
+        >
+          <label for="card-number" class="visually-hidden">Card Number</label>
+          <input
+            type="text"
+            inputmode="numeric"
+            class="full-width"
+            maxlength="19"
+            minlength="15"
+            type="text"
+            onkeydown="numbersOnly(event)"
+            id="card-number"
+            placeholder="Card Number"
+            required
+          />
+        </form-field>
+        <div class="card-security-info">
+          <form-field class="half-width">
+            <label for="expiration-date" class="visually-hidden"
+              >Expiration Date</label
+            >
+            <input
+              id="expiration-date"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9\s\/]*"
+              placeholder="Expiration date (MM / YY)"
+              onkeydown="addBackSlash(event)"
+              required
+            />
+          </form-field>
+          <form-field
+            range-overflow-message="This field has a max of 4 digits"
+            range-underflow-message="This field has a minium of 3 digits"
+            class="half-width"
+          >
+            <label for="cvv" class="visually-hidden">CVV</label>
+            <input
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              id="cvv"
+              maxlength="4"
+              minlength="3"
+              onkeydown="numbersOnly(event)"
+              placeholder="Security Code"
+              required
+            />
+          </form-field>
+        </div>
+
+        <div><button type="submit" id="secure-submit">Save Card</button></div>
+      </div>
+    </form>
   </body>
+  <script>
+    function numbersOnly(event) {
+      return (
+        event.key == "Backspace" ||
+        (isNaN(parseInt(event.key)) && event.preventDefault())
+      );
+    }
+
+    function addBackSlash(event) {
+      let value = event.target.value.replace(/\D/g, "");
+      if (value.length == 1) {
+        const valueNumber = parseInt(value);
+        if (valueNumber > 1) {
+          value = "0" + value;
+        }
+      }
+      if (value.length >= 3) {
+        value = value.slice(0, 2) + "/" + value.slice(2, 4);
+      }
+      event.target.value = value;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const validationToken = urlParams.get("token");
+
+    document
+      .getElementById("expiration-date")
+      .addEventListener("input", addBackSlash);
+
+    document.getElementById("secure-submit").addEventListener("click", () => {
+      const cardNumber = document.getElementById("card-number").value;
+      const cvv = document.getElementById("cvv").value;
+      const expirationDate = document.getElementById("expiration-date").value;
+      const nameOnCard = document.getElementById("cardholder").value;
+
+      const formData = {
+        cardNumber,
+        cvv,
+        expirationDate,
+        cardNumber,
+        action: "full-form-submit",
+        validationToken,
+      };
+
+      console.log(
+        "Submit button was clicked. Data =>" + JSON.stringify(formData)
+      );
+      window.parent.postMessage(formData, "http://localhost:3000");
+    });
+  </script>
 </html>
