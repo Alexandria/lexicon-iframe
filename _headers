@@ -1,4 +1,6 @@
+/*
 Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; frame-ancestors 'self' http://localhost:3000 lexicon-iframe.netlify.app;
 
 /src/style.css
   Access-Control-Allow-Origin: *
+  Access-Control-Allow-Headers: Content-Type
