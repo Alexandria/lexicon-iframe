@@ -84,10 +84,7 @@ export class FormField extends HTMLElement {
 
   connectedCallback() {
     this.#input = this.querySelector("input");
-    console.log("Form field is connected");
-
     if (this.#input) {
-      console.log("We have an input!");
       // handle invalid behavior
       this.#input.addEventListener("invalid", this.#handleInvalid);
 
