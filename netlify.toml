@@ -11,6 +11,6 @@
     Access-Control-Allow-Origin = "*"
 
 [[headers]]
-  for = "/assets/*.css"
+  for = "/assets/*"
   [headers.values]
     Access-Control-Allow-Origin = "*"
