@@ -6,6 +6,6 @@
 
 # Headers for your specific CSS file (CORS)
 [[headers]]
-  for = "style.css" 
+  for = "/style.css" 
   [headers.values]
     Access-Control-Allow-Origin = "*"
