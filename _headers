@@ -1,1 +1,1 @@
-Content-Security-Policy: default-src 'none'; frame-ancestors 'self' http://localhost:3000 lexicon-iframe.netlify.app;
+Content-Security-Policy: default-src 'none'; script-src 'self'; style-src 'self'; frame-ancestors 'self' http://localhost:3000 lexicon-iframe.netlify.app;
