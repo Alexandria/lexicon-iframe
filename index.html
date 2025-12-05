@@ -94,7 +94,9 @@
           </form-field>
         </div>
 
-        <div><button type="submit" id="secure-submit">Save Card</button></div>
+        <div>
+          <button type="submit" id="secure-submit">Process Payment</button>
+        </div>
       </div>
     </form>
   </body>
@@ -139,6 +141,7 @@
         expirationDate,
         nameOnCard,
         validationToken,
+        action: "form-submit",
       };
 
       console.log(
