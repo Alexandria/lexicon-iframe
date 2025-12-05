@@ -144,9 +144,6 @@
         action: "form-submit",
       };
 
-      console.log(
-        "Submit button was clicked. Data =>" + JSON.stringify(formData)
-      );
       window.parent.postMessage(formData, "http://localhost:3000");
     });
   </script>
