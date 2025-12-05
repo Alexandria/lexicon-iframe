@@ -144,7 +144,10 @@
         action: "form-submit",
       };
 
-      window.parent.postMessage(formData, "http://localhost:3000");
+      window.parent.postMessage(
+        formData,
+        "https://jf-iframe-web-component.netlify.app"
+      );
     });
   </script>
 </html>
