@@ -2,7 +2,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-ancestors 'self' jf-iframe-web-component lexicon-iframe.netlify.app;"
+    Content-Security-Policy = "default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; frame-ancestors 'self' jf-iframe-web-component.netlify.app lexicon-iframe.netlify.app;"
 
 # Headers for your specific CSS file (CORS)
 [[headers]]
